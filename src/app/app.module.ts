@@ -54,6 +54,10 @@ import { WebRTCService } from './services/webrtc.service';
 import { AudioDeviceService } from './services/audio-device.service';
 import { SettingsComponent } from './components/modals/settings/settings.component';
 import { StatusBarComponent } from './components/status-bar/status-bar.component';
+import { LeftSidebarComponent } from './components/left-sidebar/left-sidebar.component';
+import { ChatListComponent } from './components/chat-list/chat-list.component';
+import { ChatWindowComponent } from './components/chat-window/chat-window.component';
+import { ChatRequestsComponent } from './components/chat-requests/chat-requests.component';
 
 
 const optionalImports = environment.production ? [] : [
@@ -90,6 +94,10 @@ const optionalImports = environment.production ? [] : [
     VoiceChannelComponent,
     SettingsComponent,
     StatusBarComponent,
+    LeftSidebarComponent,
+    ChatListComponent,
+    ChatWindowComponent,
+    ChatRequestsComponent,
   ],
   entryComponents: [
     CreateServerComponent,

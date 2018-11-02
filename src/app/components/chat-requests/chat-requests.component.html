@@ -1,0 +1,10 @@
+<div class="chat-requests">
+  <div class="chat-request" *ngFor="let request of chatRequests | async">
+    <div class="chat-request-title">
+        {{request.username}}
+      </div>
+      <span class="text-right">
+          <input type="button" class="btn btn-primary btn-sm" value="Accept" (click)="acceptRequest(request)">
+      </span>
+  </div>  
+</div>

@@ -1,0 +1,27 @@
+<div class="mesgs">
+  <div class="msg_history">
+    <div *ngFor="let message of messages | async">
+    <div class="incoming_msg" *ngIf='message.type ==="incoming"'>
+      <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+      <div class="received_msg">
+        <div class="received_withd_msg">
+          <p>{{message.text}}</p>
+          <span class="time_date"> 11:01 AM    |    June 9</span></div>
+      </div>
+    </div>
+    <div class="outgoing_msg" *ngIf='message.type ==="outgoing"'>
+      <div class="sent_msg">
+        <p>{{message.text}}</p>
+        <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+    </div>
+  </div> 
+</div> 
+<!-- Input box -->
+  <div class="type_msg">
+    <div class="input_msg_write">
+      <input type="text" class="write_msg" name="chatMessage" [(ngModel)]="chatMessage"
+       placeholder="Type a message">
+      <button class="msg_send_btn" type="button" (click)="sendMessage(chatMessage)"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</div>

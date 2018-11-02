@@ -10,7 +10,7 @@ import voiceChannelModel from '../../models/voice-channel.model';
 export function joinServer(io: any) {
 
   io.on('connection', async socket => {
-
+      
     socket.on('join-server', async serverId => {
       if (!mongoose.Types.ObjectId.isValid(serverId)) {
         socket.emit('soft-error', 'Invalid server ID');

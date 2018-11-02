@@ -1,0 +1,22 @@
+.chat-requests {
+    width: 18%;
+    display: inline-block;
+    background: #192c40;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+
+}
+.chat-request {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-right: 5px;
+  background: #ddd;
+}
+
+.chat-request-title {
+  display: inline-block; 
+  padding: 5px; 
+  width: 100px;
+}
+

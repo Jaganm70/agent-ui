@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { MainComponent } from './main.component';
+import { SettingsService } from '../../services/settings.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -8,9 +9,16 @@ describe('MainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainComponent ]
-    })
-    .compileComponents();
+      declarations: [
+        MainComponent,
+      ],
+      imports: [
+      ],
+      providers: [
+        SettingsService,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +27,7 @@ describe('MainComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('initial state', async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
 });

@@ -6,6 +6,8 @@ import { currentChatChannelReducer } from './current-chat-channel.reducer';
 import { friendsReducer } from './friends-reducer';
 import { meReducer } from './me-reducer';
 import { currentVoiceChannelReducer } from './current-voice-channel-reducer';
+import { currentChatRequestReducer, acceptedChatRequestsReducer, chatRequestsReducer } from './chat-request.reducer';
+
 
 export const reducers: ActionReducerMap<AppState> = {
   serverList: serverListReducer,
@@ -14,4 +16,7 @@ export const reducers: ActionReducerMap<AppState> = {
   currentVoiceChannel: currentVoiceChannelReducer,
   friends: friendsReducer,
   me: meReducer,
+  chatRequests: chatRequestsReducer,
+  acceptedChats : acceptedChatRequestsReducer,
+  currentChat  : currentChatRequestReducer
 };

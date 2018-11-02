@@ -20,6 +20,8 @@ import { leaveVoiceChannel } from './voice-channel/leave';
 import { createVoiceChannel } from './voice-channel/create';
 import { deleteVoiceChannel } from './voice-channel/delete';
 
+import {agentEvents} from './chats/agent_events'
+
 let ioServer = null;
 
 export function getIoServer() {
@@ -63,6 +65,9 @@ export async function startWs(server) {
 
   // WebRTC
   signal(io);
+
+  //Agent
+  agentEvents(io);
 
   ioServer = io;
 }

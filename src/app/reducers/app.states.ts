@@ -3,7 +3,7 @@ import { ChatChannel } from 'shared-interfaces/channel.interface';
 import { FriendsStore } from './friends-reducer';
 import { Me } from 'shared-interfaces/user.interface';
 import { VoiceChannel } from '../../../shared-interfaces/voice-channel.interface';
-
+import { Visitor, ChatRequest } from '../../../shared-interfaces/visitor.interface';
 export interface AppState {
   serverList: ChatServer[];
   currentServer: ChatServer;
@@ -11,4 +11,7 @@ export interface AppState {
   currentVoiceChannel: VoiceChannel;
   friends: FriendsStore;
   me: Me;
+  chatRequests : ChatRequest[];
+  currentChat  : ChatRequest;
+  acceptedChats : ChatRequest[];
 }

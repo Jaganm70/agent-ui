@@ -1,5 +1,6 @@
 import { ChannelList, JoinedChannelResponse } from 'shared-interfaces/channel.interface';
 import { ChatMessage } from '../../../../shared-interfaces/message.interface';
+import { Visitor } from '../../../../shared-interfaces/visitor.interface';
 import {
   SET_CHANNEL_LIST, SERVER_SET_USER_LIST,
   SERVER_UPDATE_USER_LIST, SET_CHANNEL_LAST_MESSAGE_DATE,
@@ -11,10 +12,11 @@ import { User } from '../../../../shared-interfaces/user.interface';
 import { SET_FRIEND_REQUESTS } from '../../reducers/friends-reducer';
 import { JOIN_VOICE_CHANNEL, SET_VOICE_CHANNEL_USERS, LEAVE_VOICE_CHANNEL } from '../../reducers/current-voice-channel-reducer';
 import { VoiceChannel } from '../../../../shared-interfaces/voice-channel.interface';
+import {  CHAT_REQUEST, ADD_CHAT_MESSAGE} from '../../reducers/chat-request.reducer';
 import { WebsocketService } from '../websocket.service';
 import { ErrorNotification } from '../error.service';
 
-export const CHAT_MESSAGE_HANDLER = 'chat-message';
+
 export const CHANNEL_LIST_HANDLER = 'channel-list';
 export const JOINED_CHANNEL_HANDLER = 'joined-channel';
 export const SERVER_USERLIST_HANDLER = 'server-user-list';
@@ -22,6 +24,9 @@ export const SERVER_UPDATE_USERLIST_HANDLER = 'update-user-list';
 export const SET_FRIEND_REQUESTS_HANDLER = 'friend-requests';
 export const JOINED_VOICE_CHANNEL_HANDLER = 'joined-voice-channel';
 export const VOICE_CHANNEL_USERS = 'voice-channel-users';
+
+export const VISITOR_CHAT_REQUEST_HANDLER = 'visitor-chat-request';
+export const CHAT_MESSAGE_HANDLER = 'chat-message';
 
 export const handlers: { [key: string]: (wsService: WebsocketService) => void } = {
   [CHAT_MESSAGE_HANDLER]: chatMessage,
@@ -32,9 +37,28 @@ export const handlers: { [key: string]: (wsService: WebsocketService) => void } 
   [SET_FRIEND_REQUESTS_HANDLER]: setFriendRequests,
   [JOINED_VOICE_CHANNEL_HANDLER]: joinedVoiceChannel,
   [VOICE_CHANNEL_USERS]: voiceChannelUsers,
+  [VISITOR_CHAT_REQUEST_HANDLER]: visitorchatrequest
 };
 
-function chatMessage(wsService: WebsocketService) {
+function visitorchatrequest(wsService: WebsocketService){
+  wsService.socket.on(VISITOR_CHAT_REQUEST_HANDLER, (visitor) => {
+    wsService.store.dispatch({
+      type: CHAT_REQUEST,
+      payload: visitor,
+    });
+  });
+}
+
+function chatMessage(wsService: WebsocketService){
+  wsService.socket.on(CHAT_MESSAGE_HANDLER, (message) => {
+    wsService.store.dispatch({
+      type: ADD_CHAT_MESSAGE,
+      payload: message,
+    });
+  });
+}
+
+/*function chatMessage(wsService: WebsocketService) {
   wsService.socket.on(CHAT_MESSAGE_HANDLER, (message: ChatMessage) => {
     let isCurrentServer = false;
     wsService.store.select('currentChatChannel').take(1).subscribe(channel => {
@@ -57,7 +81,7 @@ function chatMessage(wsService: WebsocketService) {
       });
     }
   });
-}
+}*/
 
 function channelList(wsService: WebsocketService) {
   wsService.socket.on(CHANNEL_LIST_HANDLER, async (list: ChannelList) => {
