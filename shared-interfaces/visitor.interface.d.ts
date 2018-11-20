@@ -11,15 +11,24 @@ export interface Visitor {
 
 export interface Message {
   _id : String,
-  text : String,
+  message : any,
   type : String,
-  agent : Me
+  agentId : String,
+  visitorId : String,
+  sessionId : String
 }
 
+export interface AgentChat {
+  _id : String,
+  visitorId : String,
+  sessionId: String,
+  visitorName : String,
+  messages : Message[]
+}
 export interface ChatRequest {
   _id : String,
-  visitor_id : String,
-  session_id: String,
-  visitor_name : String,
+  visitorId : String,
+  sessionId: String,
+  visitorName : String,
   messages : Message[]
 }

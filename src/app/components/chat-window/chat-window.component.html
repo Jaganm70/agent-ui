@@ -1,17 +1,17 @@
 <div class="mesgs">
   <div class="msg_history">
-    <div *ngFor="let message of messages | async">
-    <div class="incoming_msg" *ngIf='message.type ==="incoming"'>
+    <div *ngFor="let msg of messages | async">
+    <div class="incoming_msg" *ngIf='msg.type ==="visitor"'>
       <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
       <div class="received_msg">
         <div class="received_withd_msg">
-          <p>{{message.text}}</p>
+          <p>{{msg.message.text}}</p>
           <span class="time_date"> 11:01 AM    |    June 9</span></div>
       </div>
     </div>
-    <div class="outgoing_msg" *ngIf='message.type ==="outgoing"'>
+    <div class="outgoing_msg" *ngIf='msg.type ==="agent"'>
       <div class="sent_msg">
-        <p>{{message.text}}</p>
+        <p>{{msg.message.text}}</p>
         <span class="time_date"> 11:01 AM    |    June 9</span> </div>
     </div>
   </div> 

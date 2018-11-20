@@ -18,8 +18,7 @@ export class ChatRequestsComponent implements OnInit {
   me : Me
   constructor(private store: Store<AppState>, private wsService: WebsocketService ) { 
     this.chatRequests = this.store.select((state) => {
-      console.log("======");
-    return state.chatRequests;
+      return state.chatRequests;
     });
      store.select(state => state.me).subscribe(rep =>{
       this.me = rep;
@@ -30,8 +29,9 @@ export class ChatRequestsComponent implements OnInit {
     event.preventDefault();
 
     var data = {
-      visitor : request,
-      agent : this.me
+      visitorId : request.visitorId,
+      agentId : this.me._id,
+      _id : request._id
     }
     this.store.dispatch({
       type: ACCEPT_CHAT_REQUEST,

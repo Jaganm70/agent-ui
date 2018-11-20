@@ -1,30 +1,30 @@
-import { createClient } from '../../RedisClient';
+import { redisLib } from '../../RedisLib'
+import { Message } from '../../db/message'
+import { random } from '../../utils/random';
+import { Chat } from '../../db/chat'
 export async function agentEvents(io: any) {
-    const client = await createClient({});
+    const redis = await redisLib();
     io.on('connection', socket => {
+        const agentId = socket.claim.user_id;
+        const socketId = socket.id;
+        redis.hset("chat_agents", agentId, socketId);
         socket.on('chat-request-accepted',async(data: any) => {
-            var visitor_id = data.visitor.visitor_id;
-            var sessionStr = client.hget("sessions", visitor_id, function(err, item){
-                const session: any = JSON.parse(item);
-                console.log(">>>>>", session);
-                session.socket_id = socket.id;
-                client.hset("sessions", visitor_id, JSON.stringify(session));
-             }); 
+            var visitorId = data.visitorId;
+            var agentId = data.agentId;
+            var chatId = data._id;
+            await new Chat().addAgentToChat(chatId, agentId);
+            var session = await redis.hget("chat_visitors", visitorId);
+            session.agentId = agentId;
+            await redis.hset("chat_visitors", visitorId, session);
         });
 
         socket.on('send-message',async(data: any) => {
-            var session_id = data.session_id;
-            var visitor_id = data.visitor_id;
-            let messages = client.hget("messages", visitor_id, function(err, messages){
-                if(messages){
-                    messages = JSON.parse(messages);  
-                } else {
-                    messages = []
-                }
-                messages.push(data);
-                client.hset("messages", session_id, JSON.stringify(messages));
-            });
-            
+            const visitorId = data.visitorId;
+            const visitor = await redis.hget("chat_visitors", visitorId);
+            const messageId = await random();
+            data._id = messageId;
+            data.sessionId = visitor.sessionId;
+            await new Message().save(data)
         });
         
     });

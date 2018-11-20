@@ -1,9 +1,10 @@
-import { Visitor, ChatRequest, Message } from 'shared-interfaces/visitor.interface';
+import { Visitor, ChatRequest, Message, AgentChat } from 'shared-interfaces/visitor.interface';
 import { stat } from 'fs';
 
+export const AGENT_CHATS = 'AGENT_CHATS'
 export const CHAT_REQUEST = 'CHAT_REQUEST';
 export const ACCEPT_CHAT_REQUEST = 'ACCEPT_CHAT_REQUEST';
-export const ACCEPTED_CHAT_REQUEST = 'ACCEPTED_CHAT_REQUEST';
+export const ADD_AGENT_CHAT = 'ADD_AGENT_CHAT';
 export const ACTIVE_CHAT_REQUEST = 'ACTIVE_CHAT_REQUEST';
 export const ADD_CHAT_MESSAGE = 'ADD_CHAT_MESSAGE';
 
@@ -23,40 +24,59 @@ export function chatRequestsReducer(
   }
 }
 
-export function acceptedChatRequestsReducer(
+
+export function agentChatsReducer(
   state: ChatRequest[] = [], action) {
   switch (action.type) {
-    case ACCEPTED_CHAT_REQUEST:
-      const chatRequest: ChatRequest = action.payload;
-      return [...state, chatRequest];
+    case AGENT_CHATS:
+      const agentChats: AgentChat[] = action.payload;
+      return agentChats
+    case ADD_AGENT_CHAT:
+      const agentChat: AgentChat = action.payload;
+      return [...state, agentChat];
     default:
       return state;
   }
 }
-const dummyData = {"_id":"1234", "messages":[
-  {_id:"1234",
-  text:"Hi", 
-  type:"incoming", 
-  agent:{
-    username:"asd",
-     _id:"1222"}
-    },{_id:"1234",
-    text:"Hello", 
-    type:"outgoing", 
-    agent:{
-      username:"asd",
-       _id:"1222"}
-      },
-      {_id:"1234",
-    text:"How can i help you?", 
-    type:"incoming", 
-    agent:{
-      username:"asd",
-       _id:"1222"}
+const dummyData = {
+  _id:"1234", 
+  "messages":[
+  {
+  _id:"1234",
+  message:{
+    type: "text",
+    text: "Hi"
+  }, 
+  type:"visitor", 
+  agentId:"1222",
+  visitorId : "1234",
+  sessionId:"1111"
+  },
+  {
+    _id:"1234",
+    message:{
+      type: "text",
+      text: "How are you?"
+    }, 
+    type:"agent", 
+    agentId:"1222",
+    visitorId : "1234",
+    sessionId:"1111"
+    },
+    {
+      _id:"1234",
+      message:{
+        type: "text",
+        text: "Hi"
+      }, 
+      type:"visitor", 
+      agentId:"1222",
+      visitorId : "1234",
+      sessionId:"1111"
       }
-  ],session_id:"1234", visitor_id:"1234", visitor_name:"jaganmohan" }
+  ],sessionId:"1234", visitorId:"1234", visitorName:"jaganmohan" }
 export function currentChatRequestReducer(
-  state: ChatRequest = dummyData, action) {
+  state: ChatRequest, action) {
   switch (action.type) {
     case ACTIVE_CHAT_REQUEST:
       const chatRequest: ChatRequest = action.payload;

@@ -33,12 +33,15 @@ router.delete('/delete-server/:id', authMiddleware, deleteServer);
 // Channels
 router.delete('/delete-channel/:id', authMiddleware, deleteChannel);
 
-//Agent Transfer
-import {startChat, sendMessage, getMessages} from './chats/visitors';
- 
+//Agent publiucTransfer
+import {startChat, sendMessage, getMessages} from './visitors/visitor';
+import {getChats} from './chats/chat' 
 router.post('/visitors/:visitorId/chat/start', startChat);
 router.post('/visitors/:visitorId/chat/send_message', sendMessage);
 router.post('/visitors/:visitorId/chat/messages', getMessages);
 
+//Get Chats
+router.get('/users/:userId/chats', authMiddleware, getChats);
+router.get('/users/:userId/chats/:chatId/messages', authMiddleware, getChats);
 
 export default router;

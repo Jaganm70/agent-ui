@@ -6,7 +6,7 @@ import { WebsocketService } from '../../services/websocket.service';
 import { ChatRequest, Message } from 'shared-interfaces/visitor.interface';
 import { Me } from 'shared-interfaces/user.interface';
 import { ADD_CHAT_MESSAGE } from '../../reducers/chat-request.reducer';
-import { stat } from 'fs';
+
 @Component({
   selector: 'app-chat-window',
   templateUrl: './chat-window.component.html',
@@ -41,11 +41,14 @@ export class ChatWindowComponent implements OnInit {
       return;
     }
     const message =  {
-      text : msg,
-      type : 'incoming',
-      visitor_id: this.chatRequest.visitor_id,
-      session_id: this.chatRequest.session_id,
-      agent : this.me
+      message : {
+        type : 'text',
+        text : msg
+      },
+      type : 'agent',
+      visitorId: this.chatRequest.visitorId,
+      sessionId: this.chatRequest.sessionId,
+      agentId : this.me._id
     };
     this.store.dispatch({
       type: ADD_CHAT_MESSAGE,

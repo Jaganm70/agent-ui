@@ -8,6 +8,7 @@ import { ErrorService } from '../services/error.service';
 import { Router } from '@angular/router';
 import { ActivatedRouteSnapshot } from '@angular/router/src/router_state';
 import { SET_ME } from '../reducers/me-reducer';
+import { AGENT_CHATS, ACTIVE_CHAT_REQUEST } from '../reducers/chat-request.reducer';
 
 @Injectable()
 export class MainResolver implements Resolve<any> {
@@ -29,8 +30,13 @@ export class MainResolver implements Resolve<any> {
             .toPromise(),
           this.apiService
             .get('users/me')
-            .toPromise(),
+            .toPromise()
         ]);
+      const agentChats:any = await Promise.resolve(
+        this.apiService
+        .get('users/me/chats')
+        .toPromise()  
+      );     
       this.store.dispatch({
         type: UPDATE_SERVER_LIST,
         payload: servers,
@@ -39,6 +45,16 @@ export class MainResolver implements Resolve<any> {
         type: SET_ME,
         payload: user,
       });
+
+      this.store.dispatch({
+        type: AGENT_CHATS,
+        payload: agentChats,
+      });
+      this.store.dispatch({
+        type : ACTIVE_CHAT_REQUEST,
+        payload: agentChats[0]
+      })
+
     } catch (e) {
       if (e.status === 401) {
         this.router.navigate(['/login']);
