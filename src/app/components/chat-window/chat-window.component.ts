@@ -14,6 +14,7 @@ import { ADD_CHAT_MESSAGE } from '../../reducers/chat-request.reducer';
 })
 export class ChatWindowComponent implements OnInit {
 
+  chatMessage: string;
   @ViewChild('chatInput') private chatInput: ElementRef;
   @ViewChild('messgeContainer') private messageContainer: ElementRef;
   
@@ -56,6 +57,7 @@ export class ChatWindowComponent implements OnInit {
     });
 
     this.wsService.socket.emit('send-message', message);
+    this.chatMessage = "";
     //this.scrollChatToBottom();
   }
   scrollChatToBottom() {

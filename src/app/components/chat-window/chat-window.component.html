@@ -19,7 +19,7 @@
 <!-- Input box -->
   <div class="type_msg">
     <div class="input_msg_write">
-      <input type="text" class="write_msg" name="chatMessage" [(ngModel)]="chatMessage"
+      <input type="text" class="write_msg" (keyup.enter)="sendMessage(chatMessage)" name="chatMessage" [(ngModel)]="chatMessage"
        placeholder="Type a message">
       <button class="msg_send_btn" type="button" (click)="sendMessage(chatMessage)"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
     </div>

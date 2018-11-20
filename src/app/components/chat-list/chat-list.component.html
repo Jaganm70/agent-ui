@@ -11,13 +11,13 @@
         </span> </div>
     </div>
   </div>
-  <div *ngFor="let chat of agentChats | async">
+  <div>
   <div class="inbox_chat">
-    <div class="chat_list" ng-class="{'active_chat': chat.active">
+    <div class="chat_list" *ngFor="let chat of agentChats | async" [ngClass]="{'active_chat': chat.visitorId == activeVisitorId}" (click)="selectVisitor(chat)">
       <div class="chat_people">
         <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
         <div class="chat_ib">
-          <h5>Sunil Rajput <span class="chat_date">{{chat.updatedDate | date}}</span></h5>
+          <h5>{{chat.visitorId}} <span class="chat_date">{{chat.updatedDate | date}}</span></h5>
           <p>Test, which is a new approach to have all solutions 
             astrology under one roof.</p>
         </div>
