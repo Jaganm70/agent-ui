@@ -23,7 +23,7 @@ export class ChatListComponent implements OnInit {
   constructor(private store: Store<AppState>, private wsService: WebsocketService) {
     this.agentChats = this.store.select((state) => {
       // state.agentChats[0]['active'] = true;
-      this.activeVisitorId = state.currentChat.visitorId;
+      this.activeVisitorId = state.currentChat._id;
       return state.agentChats;  
     });
    }

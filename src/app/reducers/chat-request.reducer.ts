@@ -33,7 +33,7 @@ export function agentChatsReducer(
       return agentChats
     case ADD_AGENT_CHAT:
       const agentChat: AgentChat = action.payload;
-      return [...state, agentChat];
+      return [agentChat, ...state];
     default:
       return state;
   }

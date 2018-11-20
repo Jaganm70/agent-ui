@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers/app.states';
 import { WebsocketService } from '../../services/websocket.service';
 import { Me } from 'shared-interfaces/user.interface';
-import { ACCEPT_CHAT_REQUEST, ACTIVE_CHAT_REQUEST } from '../../reducers/chat-request.reducer';
+import { ACCEPT_CHAT_REQUEST, ACTIVE_CHAT_REQUEST, ADD_AGENT_CHAT } from '../../reducers/chat-request.reducer';
 
 @Component({
   selector: 'app-chat-requests',
@@ -36,6 +36,11 @@ export class ChatRequestsComponent implements OnInit {
     this.store.dispatch({
       type: ACCEPT_CHAT_REQUEST,
       payload: request,
+    });
+
+    this.store.dispatch({
+      type: ADD_AGENT_CHAT,
+      payload: request
     });
 
     this.store.dispatch({
