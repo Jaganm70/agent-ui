@@ -1,13 +1,13 @@
 .app-header {
     height: 40px;
-    background: #4d5f85;
+    box-shadow: 1px 1px 1px 1px #ccc;
     .dropdown {
         .dropdown-toggle{
-            color: #fff;
-            background: #4d5f85 !important;
+            color: #2f2f2f;
+            background: #fff !important;
         }
         .dropdown-toggle:hover{
-            background: #4d5f85 !important;
+            background: #fff !important;
         }
         .dropdown-menu {
             top: 40px;

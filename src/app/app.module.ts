@@ -60,6 +60,7 @@ import { ChatWindowComponent } from './components/chat-window/chat-window.compon
 import { ChatRequestsComponent } from './components/chat-requests/chat-requests.component';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { AppBodyComponent } from './components/app-body/app-body.component';
+import { RightPanelComponent } from './components/right-panel/right-panel.component';
 
 
 const optionalImports = environment.production ? [] : [
@@ -102,6 +103,7 @@ const optionalImports = environment.production ? [] : [
     ChatRequestsComponent,
     AppHeaderComponent,
     AppBodyComponent,
+    RightPanelComponent,
   ],
   entryComponents: [
     CreateServerComponent,
