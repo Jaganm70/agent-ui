@@ -1,4 +1,3 @@
-import { randomstring } from 'randomstring';
 import {getIoServer} from '../../websocket/socket-server';
 import { createClient } from '../../RedisClient';
 import { redisLib } from '../../RedisLib'

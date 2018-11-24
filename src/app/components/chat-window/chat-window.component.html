@@ -1,4 +1,9 @@
 <div class="mesgs">
+  <div>
+    <button *ngIf='activeChat.status=="active"' type="button" class="btn btn-danger pull-right" (click)="endChat(activeChat)">End Chat</button>
+    <button *ngIf='activeChat.status!=="active"' disabled type="button" class="btn btn-danger pull-right" (click)="endChat(activeChat)">End Chat</button>
+  </div>
+  <div class="clearfix"></div>
   <div class="msg_history">
     <div *ngFor="let msg of messages | async">
     <div class="incoming_msg" *ngIf='msg.type ==="visitor"'>
@@ -6,14 +11,19 @@
       <div class="received_msg">
         <div class="received_withd_msg">
           <p>{{msg.message.text}}</p>
-          <span class="time_date"> 11:01 AM    |    June 9</span></div>
+          <span class="time_date"> {{msg.updatedDate | date:"h:mma"}} | {{msg.updatedDate | date:"MMM d"}}</span></div>
       </div>
     </div>
     <div class="outgoing_msg" *ngIf='msg.type ==="agent"'>
       <div class="sent_msg">
         <p>{{msg.message.text}}</p>
-        <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+        <span class="time_date"> {{msg.updatedDate | date:"h:mma"}} | {{msg.updatedDate | date:"MMM d"}}</span> </div>
     </div>
+    <div class="system_msg" *ngIf='msg.type ==="system"'>
+        <div class="received_msg">
+          <p>{{msg.message.text}}</p>
+          <span class="time_date"> {{msg.updatedDate | date:"h:mma"}} | {{msg.updatedDate | date:"MMM d"}}</span> </div>
+      </div>
   </div> 
 </div> 
 <!-- Input box -->

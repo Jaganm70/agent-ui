@@ -1,43 +1,50 @@
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
+.left-slidebar {
+	width: 50px;
+    .left{
+        width: 50px;
+        height: 100%;
+        background: #2f2f2f;
+        white-space: nowrap; 
+        transition: width 0.5s ;
+        position: fixed;
+        z-index: 9999; 
+    }
+	.left ul{
+		padding: 0;
+		list-style-type: none;
+		text-align: left;
+	}
+	.left li {
+		width: auto;
+		height: 60px;
+		line-height: 50px;  
+		padding-left: 18px;
+	}
+	.left li:hover {
+		background: black; 
+	}
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
+	.left:hover {
+        width: 250px; 
+    }  
 
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-#main {
-    transition: margin-left .5s;
-    padding: 16px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+		.left .item-menu {
+	        height:50px;
+	        overflow:hidden;
+	        color:#fff;
+	    }  
+	.left a{
+		color: white;
+	    text-decoration: none;
+	    font-weight: bold;
+	} 
+	span.menu{
+		padding-left: 17px;
+	}
+	.t_search {
+	    color: black;
+	    height: 35px;
+	    margin-left: 15px;
+	    width: 190px
+    }
 }

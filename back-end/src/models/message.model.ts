@@ -3,7 +3,7 @@ const MessageSchema = new mongoose.Schema({
     _id : { type: String, required: true},
     visitorId : {type: String, required: true},
     agentId: {type: String, required: true},
-    type: {type: String, enum:['visitor', 'agent'], required: true},
+    type: {type: String, enum:['visitor', 'agent', 'system'], required: true},
     sessionId : String,
     message : Object,
     createdDate : {type: Date, required: true, default: Date.now},

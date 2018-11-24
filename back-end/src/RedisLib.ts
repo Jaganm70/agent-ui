@@ -4,7 +4,8 @@ import { createClient } from './RedisClient';
 export async function redisLib(){
     return {
         hget,
-        hset
+        hset,
+        hdel
     }
 }
 
@@ -37,4 +38,14 @@ const hset: any = function(collection, key, value){
              return resolve(res)  
         })       
    });
+}
+
+const hdel: any = function(collection, key){
+    return new Promise(async (resolve, reject) => {
+        const client = await createClient({}); 
+        client.hdel(collection, key, function(err, res){
+             if(err) return reject(err)
+             return resolve(res)  
+         })       
+    });
 }

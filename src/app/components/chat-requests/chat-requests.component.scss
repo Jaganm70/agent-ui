@@ -1,9 +1,8 @@
 .chat-requests {
-    width: 18%;
-    display: inline-block;
-    background: #192c40;
-    height: calc(100vh - 60px);
+    width: calc(100vw - 850px);
+    background: #2f2f2f;
     overflow-y: auto;
+    height: 100%;
 
 }
 .chat-request {

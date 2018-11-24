@@ -12,7 +12,7 @@ import { User } from '../../../../shared-interfaces/user.interface';
 import { SET_FRIEND_REQUESTS } from '../../reducers/friends-reducer';
 import { JOIN_VOICE_CHANNEL, SET_VOICE_CHANNEL_USERS, LEAVE_VOICE_CHANNEL } from '../../reducers/current-voice-channel-reducer';
 import { VoiceChannel } from '../../../../shared-interfaces/voice-channel.interface';
-import {  CHAT_REQUEST, ADD_CHAT_MESSAGE} from '../../reducers/chat-request.reducer';
+import {  CHAT_REQUEST, ADD_CHAT_MESSAGE, ADD_AGENT_CHAT, ACTIVE_CHAT, DELETE_CHAT_REQUEST} from '../../reducers/chat-request.reducer';
 import { WebsocketService } from '../websocket.service';
 import { ErrorNotification } from '../error.service';
 
@@ -26,7 +26,9 @@ export const JOINED_VOICE_CHANNEL_HANDLER = 'joined-voice-channel';
 export const VOICE_CHANNEL_USERS = 'voice-channel-users';
 
 export const VISITOR_CHAT_REQUEST_HANDLER = 'visitor-chat-request';
+export const DELETE_CHAT_REQUEST_HANDLER = 'delete-chat-request';
 export const CHAT_MESSAGE_HANDLER = 'chat-message';
+export const NEW_CHAT_HANDLER = 'new-chat';
 
 export const handlers: { [key: string]: (wsService: WebsocketService) => void } = {
   [CHAT_MESSAGE_HANDLER]: chatMessage,
@@ -37,7 +39,9 @@ export const handlers: { [key: string]: (wsService: WebsocketService) => void } 
   [SET_FRIEND_REQUESTS_HANDLER]: setFriendRequests,
   [JOINED_VOICE_CHANNEL_HANDLER]: joinedVoiceChannel,
   [VOICE_CHANNEL_USERS]: voiceChannelUsers,
-  [VISITOR_CHAT_REQUEST_HANDLER]: visitorchatrequest
+  [VISITOR_CHAT_REQUEST_HANDLER]: visitorchatrequest,
+  [NEW_CHAT_HANDLER] : newChat,
+  [DELETE_CHAT_REQUEST_HANDLER]: deleteChatRequest
 };
 
 function visitorchatrequest(wsService: WebsocketService){
@@ -54,6 +58,29 @@ function chatMessage(wsService: WebsocketService){
     wsService.store.dispatch({
       type: ADD_CHAT_MESSAGE,
       payload: message,
+    });
+  });
+}
+
+function newChat(wsService: WebsocketService){
+  wsService.socket.on(NEW_CHAT_HANDLER, (chat) => {
+    wsService.store.dispatch({
+      type: ACTIVE_CHAT,
+      payload: chat,
+    });
+    wsService.store.dispatch({
+      type: ADD_AGENT_CHAT,
+      payload: chat,
+    });
+    
+  });
+}
+
+function deleteChatRequest(wsService: WebsocketService){
+  wsService.socket.on(DELETE_CHAT_REQUEST_HANDLER, (chat) => {
+    wsService.store.dispatch({
+      type: DELETE_CHAT_REQUEST,
+      payload: chat,
     });
   });
 }

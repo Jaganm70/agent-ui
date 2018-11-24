@@ -4,6 +4,7 @@ const ChatSchema = new mongoose.Schema({
     visitorId : {type: String, required: true},
     sessionId : {type: String, required: true},
     agentId : String,
+    status : {type: String, enum:['active', 'inactive']},
     createdDate : {type: Date, required: true, default: Date.now},
     updatedDate : {type: Date, required: true, default: Date.now}
   });

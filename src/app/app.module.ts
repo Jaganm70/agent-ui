@@ -58,6 +58,8 @@ import { LeftSidebarComponent } from './components/left-sidebar/left-sidebar.com
 import { ChatListComponent } from './components/chat-list/chat-list.component';
 import { ChatWindowComponent } from './components/chat-window/chat-window.component';
 import { ChatRequestsComponent } from './components/chat-requests/chat-requests.component';
+import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { AppBodyComponent } from './components/app-body/app-body.component';
 
 
 const optionalImports = environment.production ? [] : [
@@ -98,6 +100,8 @@ const optionalImports = environment.production ? [] : [
     ChatListComponent,
     ChatWindowComponent,
     ChatRequestsComponent,
+    AppHeaderComponent,
+    AppBodyComponent,
   ],
   entryComponents: [
     CreateServerComponent,

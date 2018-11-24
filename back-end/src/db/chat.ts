@@ -5,6 +5,9 @@ export class Chat {
         const chatObj = await new Model(data)
         return await chatObj.save();
     }
+    async getChatById(chatId){
+       return await Model.findOne({_id:chatId});
+    }
     async getChats(agentId){
         //return await Model.find({agentId: agentId});
         return await Model.aggregate([
@@ -28,6 +31,9 @@ export class Chat {
     }
 
     async addAgentToChat(chatId, agentId){
-        return await Model.update({_id: chatId}, {agentId: agentId});
+        return await Model.update({_id: chatId}, {agentId: agentId, status:'active'});
+    }
+    async updateChatStatus(chatId, status){
+        return await Model.update({_id: chatId}, {status:'inactive'});
     }
 }

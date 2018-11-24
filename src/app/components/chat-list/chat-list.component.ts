@@ -4,13 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers/app.states';
 import { WebsocketService } from '../../services/websocket.service';
-
-export const AGENT_CHATS = 'AGENT_CHATS'
-export const CHAT_REQUEST = 'CHAT_REQUEST';
-export const ACCEPT_CHAT_REQUEST = 'ACCEPT_CHAT_REQUEST';
-export const ADD_AGENT_CHAT = 'ADD_AGENT_CHAT';
-export const ACTIVE_CHAT_REQUEST = 'ACTIVE_CHAT_REQUEST';
-export const ADD_CHAT_MESSAGE = 'ADD_CHAT_MESSAGE';
+import { ACTIVE_CHAT } from '../../reducers/chat-request.reducer';
 
 @Component({
   selector: 'app-chat-list',
@@ -22,7 +16,7 @@ export class ChatListComponent implements OnInit {
   activeVisitorId: any;
   constructor(private store: Store<AppState>, private wsService: WebsocketService) {
     this.agentChats = this.store.select((state) => {
-      // state.agentChats[0]['active'] = true;
+      console.log("AAAAAAAA",state.currentChat._id);
       this.activeVisitorId = state.currentChat._id;
       return state.agentChats;  
     });
@@ -32,12 +26,11 @@ export class ChatListComponent implements OnInit {
   }
 
   selectVisitor(visitorObject){
-    
     this.store.dispatch({
-      type : ACTIVE_CHAT_REQUEST,
+      type : ACTIVE_CHAT,
       payload: visitorObject
     });
-    // this.activeVisitorId = visitorObject.visitorId;
+    this.activeVisitorId = visitorObject.visitorId;
   }
 
 }

@@ -36,6 +36,8 @@ router.delete('/delete-channel/:id', authMiddleware, deleteChannel);
 //Agent publiucTransfer
 import {startChat, sendMessage, getMessages} from './visitors/visitor';
 import {getChats} from './chats/chat' 
+import {createSkill, getSkills, addAgentsToSkill, removeAgentsFromSkill} from './skills/skill';
+
 router.post('/visitors/:visitorId/chat/start', startChat);
 router.post('/visitors/:visitorId/chat/send_message', sendMessage);
 router.post('/visitors/:visitorId/chat/messages', getMessages);
@@ -43,5 +45,11 @@ router.post('/visitors/:visitorId/chat/messages', getMessages);
 //Get Chats
 router.get('/users/:userId/chats', authMiddleware, getChats);
 router.get('/users/:userId/chats/:chatId/messages', authMiddleware, getChats);
+
+//Skils
+router.get('/users/:userId/skills', authMiddleware, getSkills);
+router.post('/users/:userId/skills', authMiddleware, createSkill);
+router.post('/users/:userId/skills/:skillId/addagent', authMiddleware, addAgentsToSkill);
+router.post('/users/:userId/skills/:skillId/deleteagent', authMiddleware, removeAgentsFromSkill);
 
 export default router;

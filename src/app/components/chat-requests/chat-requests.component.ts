@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers/app.states';
 import { WebsocketService } from '../../services/websocket.service';
 import { Me } from 'shared-interfaces/user.interface';
-import { ACCEPT_CHAT_REQUEST, ACTIVE_CHAT_REQUEST, ADD_AGENT_CHAT } from '../../reducers/chat-request.reducer';
+import { DELETE_CHAT_REQUEST, ADD_AGENT_CHAT } from '../../reducers/chat-request.reducer';
 
 @Component({
   selector: 'app-chat-requests',
@@ -27,30 +27,26 @@ export class ChatRequestsComponent implements OnInit {
 
   acceptRequest(request){
     event.preventDefault();
-
     var data = {
       visitorId : request.visitorId,
       agentId : this.me._id,
       _id : request._id
     }
     this.store.dispatch({
-      type: ACCEPT_CHAT_REQUEST,
+      type: DELETE_CHAT_REQUEST,
       payload: request,
     });
 
-    this.store.dispatch({
-      type: ADD_AGENT_CHAT,
-      payload: request
-    });
+    // this.store.dispatch({
+    //   type: ADD_AGENT_CHAT,
+    //   payload: request
+    // });
 
-    this.store.dispatch({
-      type: ACTIVE_CHAT_REQUEST,
-      payload: request,
-    });
-    this.store.dispatch({
-      type: ACCEPT_CHAT_REQUEST,
-      payload: request,
-    });
+    // this.store.dispatch({
+    //   type: ACTIVE_CHAT_REQUEST,
+    //   payload: request,
+    // });
+    
     this.wsService.socket.emit('chat-request-accepted', data);
 
   }

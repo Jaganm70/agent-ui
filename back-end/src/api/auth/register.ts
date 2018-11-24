@@ -17,7 +17,6 @@ const schema = Joi.object().keys({
 });
 
 export default async function (req, res) {
-  console.log(req.body);
   const result = Joi.validate(req.body, schema);
   if (result.error) {
     return res.status(400).json({ error: result.error.details[0].message });

@@ -3,9 +3,9 @@ import { stat } from 'fs';
 
 export const AGENT_CHATS = 'AGENT_CHATS'
 export const CHAT_REQUEST = 'CHAT_REQUEST';
-export const ACCEPT_CHAT_REQUEST = 'ACCEPT_CHAT_REQUEST';
+export const DELETE_CHAT_REQUEST = 'DELETE_CHAT_REQUEST';
 export const ADD_AGENT_CHAT = 'ADD_AGENT_CHAT';
-export const ACTIVE_CHAT_REQUEST = 'ACTIVE_CHAT_REQUEST';
+export const ACTIVE_CHAT = 'ACTIVE_CHAT';
 export const ADD_CHAT_MESSAGE = 'ADD_CHAT_MESSAGE';
 
 export function chatRequestsReducer(
@@ -14,7 +14,7 @@ export function chatRequestsReducer(
     case CHAT_REQUEST:
       const chatRequest: ChatRequest = action.payload;
       return [...state, chatRequest];
-    case ACCEPT_CHAT_REQUEST:
+    case DELETE_CHAT_REQUEST:
       const vi: ChatRequest = action.payload;
       var index = state.findIndex(item => item._id === vi._id);
       state.splice(index, 1);
@@ -33,52 +33,16 @@ export function agentChatsReducer(
       return agentChats
     case ADD_AGENT_CHAT:
       const agentChat: AgentChat = action.payload;
-      return [agentChat, ...state];
+      return [...state, agentChat];
     default:
       return state;
   }
 }
-const dummyData = {
-  _id:"1234", 
-  "messages":[
-  {
-  _id:"1234",
-  message:{
-    type: "text",
-    text: "Hi"
-  }, 
-  type:"visitor", 
-  agentId:"1222",
-  visitorId : "1234",
-  sessionId:"1111"
-  },
-  {
-    _id:"1234",
-    message:{
-      type: "text",
-      text: "How are you?"
-    }, 
-    type:"agent", 
-    agentId:"1222",
-    visitorId : "1234",
-    sessionId:"1111"
-    },
-    {
-      _id:"1234",
-      message:{
-        type: "text",
-        text: "Hi"
-      }, 
-      type:"visitor", 
-      agentId:"1222",
-      visitorId : "1234",
-      sessionId:"1111"
-      }
-  ],sessionId:"1234", visitorId:"1234", visitorName:"jaganmohan" }
+
 export function currentChatRequestReducer(
   state: ChatRequest, action) {
   switch (action.type) {
-    case ACTIVE_CHAT_REQUEST:
+    case ACTIVE_CHAT:
       const chatRequest: ChatRequest = action.payload;
       return chatRequest;
     case ADD_CHAT_MESSAGE:

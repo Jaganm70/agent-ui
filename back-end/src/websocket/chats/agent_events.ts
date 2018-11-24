@@ -13,6 +13,10 @@ export async function agentEvents(io: any) {
             var agentId = data.agentId;
             var chatId = data._id;
             await new Chat().addAgentToChat(chatId, agentId);
+            const new_chat = await new Chat().getChatById(chatId);
+            console.log("New Chat...", new_chat);
+            io.emit("delete-chat-request", new_chat);
+            socket.emit("new-chat", new_chat);
             var session = await redis.hget("chat_visitors", visitorId);
             session.agentId = agentId;
             await redis.hset("chat_visitors", visitorId, session);
@@ -22,9 +26,46 @@ export async function agentEvents(io: any) {
             const visitorId = data.visitorId;
             const visitor = await redis.hget("chat_visitors", visitorId);
             const messageId = await random();
-            data._id = messageId;
-            data.sessionId = visitor.sessionId;
-            await new Message().save(data)
+                
+            if(visitor){
+                data._id = messageId;
+                data.sessionId = visitor.sessionId;
+                await new Message().save(data)
+            } else {
+                const message =  {
+                    _id: messageId,
+                    message : {
+                      type : 'text',
+                      text : 'Chat session ended.'
+                    },
+                    type : 'system',
+                    visitorId: visitorId,
+                    sessionId: data.sessionId,
+                    agentId : data.agentId
+                };
+                socket.emit('send-message', message)  
+            }
+        });
+
+        socket.on('end-chat',async(data: any) => {
+            const visitorId = data.visitorId;
+            const visitor = await redis.hget("chat_visitors", visitorId);
+            await redis.hdel("chat_visitors", visitorId);
+            const messageId = await random();
+            const message =  {
+                _id : messageId,
+                message : {
+                  type : 'text',
+                  text : 'Chat session ended.'
+                },
+                type : 'system',
+                visitorId: visitorId,
+                sessionId: data.sessionId,
+                agentId : data.agentId
+              };
+              await new Message().save(message); 
+              await new Chat().updateChatStatus(data._id, 'inactive')
+              socket.emit('send-message', message)  
         });
         
     });

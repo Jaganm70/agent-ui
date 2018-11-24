@@ -189,9 +189,9 @@ body {
 img{ max-width:100%;}
 .inbox_people {
   background: #f8f8f8 none repeat scroll 0 0;
-  display: inline-block;
   overflow: hidden;
-  width: 30%; border-right:1px solid #c4c4c4;
+  width: 300px; 
+  border-right:1px solid #c4c4c4;
   height: 100%;
 }
 .inbox_msg {
@@ -290,9 +290,8 @@ img{ max-width:100%;}
 }
 .received_withd_msg { width: 57%;}
 .mesgs {
-  display: inline-block;
   padding: 0px;
-  width: 50%;
+  width: 500px;
   border-right: 2px solid #ccc;
 }
 
@@ -339,4 +338,8 @@ img{ max-width:100%;}
   padding: 20px;
   display: flex;
   flex-direction: column;
+}
+
+.system_msg {
+  text-align: center;
 }

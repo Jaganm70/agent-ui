@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers/app.states';
 import { WebsocketService } from '../../services/websocket.service';
-import { ChatRequest, Message } from 'shared-interfaces/visitor.interface';
+import { ChatRequest, Message, AgentChat } from 'shared-interfaces/visitor.interface';
 import { Me } from 'shared-interfaces/user.interface';
 import { ADD_CHAT_MESSAGE } from '../../reducers/chat-request.reducer';
 
@@ -19,15 +19,14 @@ export class ChatWindowComponent implements OnInit {
   @ViewChild('messgeContainer') private messageContainer: ElementRef;
   
   messages: Observable<Message[]>;
-
-  chatRequest : ChatRequest;
+  activeChat : ChatRequest;
   me : Me
   constructor(private store: Store<AppState>, private wsService: WebsocketService) {
     this.messages = this.store.select((state) => {
       return (state.currentChat && state.currentChat.messages)? state.currentChat.messages :[];
     });
-      store.select(state => state.currentChat).subscribe(obj =>{
-        this.chatRequest = obj;
+    store.select(state => state.currentChat).subscribe(obj =>{
+        this.activeChat = obj;
       });
       store.select(state => state.me).subscribe(obj =>{
         this.me = obj;
@@ -47,8 +46,8 @@ export class ChatWindowComponent implements OnInit {
         text : msg
       },
       type : 'agent',
-      visitorId: this.chatRequest.visitorId,
-      sessionId: this.chatRequest.sessionId,
+      visitorId: this.activeChat.visitorId,
+      sessionId: this.activeChat.sessionId,
       agentId : this.me._id
     };
     this.store.dispatch({
@@ -59,6 +58,9 @@ export class ChatWindowComponent implements OnInit {
     this.wsService.socket.emit('send-message', message);
     this.chatMessage = "";
     //this.scrollChatToBottom();
+  }
+  endChat(chat: any){
+    this.wsService.socket.emit('end-chat', chat);
   }
   scrollChatToBottom() {
     //this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;

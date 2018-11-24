@@ -8,7 +8,7 @@ import { ErrorService } from '../services/error.service';
 import { Router } from '@angular/router';
 import { ActivatedRouteSnapshot } from '@angular/router/src/router_state';
 import { SET_ME } from '../reducers/me-reducer';
-import { AGENT_CHATS, ACTIVE_CHAT_REQUEST } from '../reducers/chat-request.reducer';
+import { AGENT_CHATS, ACTIVE_CHAT } from '../reducers/chat-request.reducer';
 
 @Injectable()
 export class MainResolver implements Resolve<any> {
@@ -51,7 +51,7 @@ export class MainResolver implements Resolve<any> {
         payload: agentChats,
       });
       this.store.dispatch({
-        type : ACTIVE_CHAT_REQUEST,
+        type : ACTIVE_CHAT,
         payload: agentChats[0]
       })
 
