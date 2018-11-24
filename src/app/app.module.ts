@@ -61,6 +61,7 @@ import { ChatRequestsComponent } from './components/chat-requests/chat-requests.
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { AppBodyComponent } from './components/app-body/app-body.component';
 import { RightPanelComponent } from './components/right-panel/right-panel.component';
+import { SkillListComponent } from './skill-list/skill-list.component';
 
 
 const optionalImports = environment.production ? [] : [
@@ -104,6 +105,7 @@ const optionalImports = environment.production ? [] : [
     AppHeaderComponent,
     AppBodyComponent,
     RightPanelComponent,
+    SkillListComponent,
   ],
   entryComponents: [
     CreateServerComponent,

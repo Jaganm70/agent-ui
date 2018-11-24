@@ -18,10 +18,12 @@ import { FriendRequestsResolver } from './resolvers/friend-requests-resolver.ser
 import { JoinServerComponent } from './components/join-server/join-server.component';
 import { ServerInviteResolver } from './resolvers/server-invite-resolver.service';
 import { Error404Component } from './components/error-pages/error-404/error-404.component';
+import { SkillListComponent } from './skill-list/skill-list.component';
 
 export const appRoutes: Routes = [
   {
-    path: 'login', component: LoginComponent,
+    path: 'login', 
+    component: LoginComponent,
     children: [
       { path: ':redirect', component: LoginComponent },
     ],
@@ -40,6 +42,7 @@ export const appRoutes: Routes = [
   {
     // Logged in routes
     path: '', component: MainComponent,
+    pathMatch: 'full',
     canActivate: [AuthGuardService],
     resolve: { state: MainResolver },
     children: [
@@ -79,6 +82,10 @@ export const appRoutes: Routes = [
         resolve: { state: ServerInviteResolver },
       },
     ],
+  },
+  {
+    path: 'skills',
+    component: SkillListComponent
   },
   {
     path: '**',

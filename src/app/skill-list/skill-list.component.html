@@ -1,0 +1,105 @@
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+
+    <div class="listWrap">
+        <a (click)="toggleSkillForm(true)" class="cursorPointer pull-right" *ngIf="!showNewSkillForm && !showSkillDetails">+Add new skill</a>
+
+        <form *ngIf="showNewSkillForm">
+          Skill name:<br>
+          <input type="text" name="skillName" [(ngModel)]="skillName"/>
+          <br>
+          Skill description:<br>
+          <input type="text" name="skillDescription" [(ngModel)]="skillDescription"/>
+          <br><br>
+          <button type="button" class="btn btn-xs" (click)="addNewSkill()">Add new skill</button>
+          <button type="button" class="btn btn-xs" (click)="toggleSkillForm(false)">Cancel</button>
+        </form> 
+
+        <ul class="list"  *ngIf="!showSkillDetails">
+        
+            <li>
+                <span></span>
+                <span>Name</span>
+                <span>Description</span>
+                <span>Agents</span>
+                <!-- <span>Actions</span> -->
+                <span></span>
+            </li>
+            <li *ngFor="let skill of skills" (click)="onSkillClick(skill)">
+                <span></span>
+                <span>{{skill.name}}</span>
+                <span>{{skill.desc}}</span>
+                <span><span class="label label-warning">{{skill.agents}}</span></span>
+                <!-- <span>
+                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default">Edit</button>
+                        <button type="button" class="btn btn-default" disabled>Delete</button>
+                    </div>
+                </span> -->
+                <span></span>
+            </li>
+           
+            <li>
+
+            </li>
+        </ul>
+
+        <div *ngIf="showSkillDetails">
+          <div class="skillDetContainer col-xs-12">
+            <div class="column label col-xs-6">
+              Skill Name:
+            </div>
+            <div class="column value col-xs-6">
+              {{currentSkill.name}}
+            </div>
+            <div class="column label col-xs-6">
+              Skill Description:
+            </div>
+            <div class="column value col-xs-6">
+              {{currentSkill.desc}}
+            </div>
+            <div class="column label col-xs-6">
+              Agents with specified skill:
+            </div>
+            <div class="column value col-xs-6">
+              {{currentSkill.agents}}
+            </div>
+          </div>
+          
+        <ul class="list paddingTop">
+        
+          <li>
+              <span></span>
+              <span>Name</span>
+              <!-- <span>Description</span> -->
+              <!-- <span>Actions</span> -->
+              <span></span>
+          </li>
+          <li *ngFor="let agent of agents">
+              <span></span>
+              <span>{{agent.name}}</span>
+              <!-- <span><span class="label label-warning">{{skill.agents}}</span></span> -->
+              <!-- <span>
+                  <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                      <button type="button" class="btn btn-default">Edit</button>
+                      <button type="button" class="btn btn-default" disabled>Delete</button>
+                  </div>
+              </span> -->
+              <span></span>
+          </li>
+         
+          <li>
+
+          </li>
+      </ul>
+          <div class="footer marginTop">
+            <button type="button" class="btn btn-xs black-btn" (click)="goToSkillsPage()">Cancel</button>
+            <button type="button" class="btn btn-xs black-btn" (click)="saveSkillWithAgent()">Save</button>
+          </div>
+        </div>
+    </div>
+
+   
+
+</div>
