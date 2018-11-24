@@ -30,7 +30,7 @@ export class ChatListComponent implements OnInit {
       type : ACTIVE_CHAT,
       payload: visitorObject
     });
-    this.activeVisitorId = visitorObject.visitorId;
+    // this.activeVisitorId = visitorObject.visitorId;
   }
 
 }
