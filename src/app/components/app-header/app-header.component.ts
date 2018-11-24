@@ -12,17 +12,43 @@ import { Router } from '@angular/router';
   styleUrls: ['./app-header.component.scss']
 })
 export class AppHeaderComponent implements OnInit {
-  me : Observable<Me>
+  me : Me
   constructor(private store: Store<AppState>, private router : Router, private wsService: WebsocketService) {
-    this.me = this.store.select((state) => {
-      return state.me;
-    });
+    this.store.select(state=> state.me).subscribe(obj =>{
+      if(obj && !obj.status) obj.status = "offline"
+      this.me = obj;
+    }); 
    }
   signout(){
     this.wsService.connected = false;
     this.router.navigate(['/login']);
   }
+  changeStatus(status){
+    if(status =='online'){
+      this.connectToSocket(status);
+    } else{
+       this.disconnect(status);
+    }
+  }
+  async disconnect(state){
+     await this.wsService.disconnect();
+     this.me.status = state;
+  }
+  async connectToSocket(status) {
+    const connected = await this.wsService.connect().toPromise();
+    if (connected) {
+      this.me.status = status;
+    } else {
+      this.me.status = "offline";
+    }
+    return !connected && {
+      error: {
+        error: 'Unable to establish a connection.',
+      },
+    };
+  }
   ngOnInit() {
   }
+
 
 }

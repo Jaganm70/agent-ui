@@ -45,7 +45,9 @@ export class WebsocketService {
     this.addSocketListeners(subj);
     return subj;
   }
-
+  public disconnect(){
+    this.socket.close()
+  }
   private addSocketListeners(subj: AsyncSubject<boolean>) {
     this.socket.on('connect', async (data: Object) => {
       if (this.reconnecting) {

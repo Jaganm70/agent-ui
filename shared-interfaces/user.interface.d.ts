@@ -24,4 +24,5 @@ export interface User {
 export interface Me {
   username: string;
   _id: string;
+  status?: string;
 }

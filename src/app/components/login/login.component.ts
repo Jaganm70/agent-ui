@@ -42,8 +42,9 @@ export class LoginComponent {
     this.apiService
       .post('login', this.loginForm.value)
       .subscribe(async (data: any) => {
-        const error = await this.connectToSocket();
-        this.onRequestComplete(error);
+        //const error = await this.connectToSocket();
+        await this.router.navigate([this.redirectTo || '/']);
+        this.onRequestComplete(false);
       }, e => this.onRequestComplete(e));
   }
 

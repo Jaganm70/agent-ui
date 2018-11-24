@@ -3,8 +3,35 @@
     box-shadow: 1px 1px 1px 1px #ccc;
     .dropdown {
         .dropdown-toggle{
-            color: #2f2f2f;
+            color: #fff;
             background: #fff !important;
+            .user-name {
+              font-size: 16px;
+              color: black;
+            }
+            .user-icon{
+                border-radius: 100%;
+                padding: 10px;
+                background: #05728f;
+            }
+            .status{
+                padding: 5px;
+                border-radius: 100%;
+                font-size: 0;
+                position: absolute;
+                margin-top: 5px; 
+                border: 2px solid #fff;
+                right: 10px;
+            }
+            .online-color{
+                background: #2eb43e;
+            }
+            .away-color{
+                background: #ffc800;
+            }
+            .offline-color{
+                background: #cbcbcb;
+            }
         }
         .dropdown-toggle:hover{
             background: #fff !important;
@@ -13,7 +40,39 @@
             top: 40px;
             right: 0;
             left: unset;
-            margin-right: 2px; 
+            margin-right: 2px;
+            .status{
+                padding: 5px;
+                border-radius: 100%;
+                font-size: 0;
+                position: absolute;
+                margin-top: 5px; 
+            } 
+            .status-title {
+                margin-left: 25px;
+            }
+            .online-color{
+             background: #2eb43e;
+            }
+            .away-color{
+              background: #ffc800;
+            }
+            .offline-color{
+                 background: #cbcbcb;
+            }
+            .glyphicon-ok {
+                float: right;
+                color: #05728f
+            }
         }
+
+    }
+    .navbar-nav>li>a{
+        padding: 0px;
+        margin: 0px;
+        width: 120px;
+    }
+    .navbar-nav>li>a>title{
+        font-size: 16px;
     }
 }
