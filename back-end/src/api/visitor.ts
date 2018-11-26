@@ -1,10 +1,10 @@
-import {getIoServer} from '../../websocket/socket-server';
-import { createClient } from '../../RedisClient';
-import { redisLib } from '../../RedisLib'
-import { Visitor } from './../../db/visitor';
-import { Message } from '../../db/message'
-import { random } from '../../utils/random'
-import { Chat } from '../../db/chat';
+import {getIoServer} from '../websocket/socket-server';
+import { createClient } from '../RedisClient';
+import { redisLib } from '../RedisLib'
+import { Visitor } from '../db/visitor';
+import { Message } from '../db/message'
+import { random } from '../utils/random'
+import { Chat } from '../db/chat';
 
 
 export async function startChat(req, res) {

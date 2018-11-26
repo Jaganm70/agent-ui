@@ -1,4 +1,4 @@
-import {Chat}  from '../../db/chat';
+import {Chat}  from '../db/chat';
 export async function getChats(req, res) {
 
     const userId = req.params.userId === 'me'? req.claim.user_id :req.params.userId

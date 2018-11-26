@@ -1,6 +1,6 @@
-import { random } from '../../utils/random'
-import { Skill } from '../../db/skill'
-import Model from '../../models/skill.model';
+import { random } from '../utils/random'
+import { Skill } from '../db/skill'
+import Model from '../models/skill.model';
 
 export async function getSkills(req, res){
     const userId = req.params.userId;
