@@ -1,4 +1,4 @@
-import User from '../../models/user.model';
+import User from '../models/user.model';
 import { Me } from 'shared-interfaces/user.interface';
 
 export async function getUser(req, res) {

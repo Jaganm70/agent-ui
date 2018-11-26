@@ -4,11 +4,11 @@ import register from './auth/register';
 import { authMiddleware } from './auth/router-middleware';
 import { createServer } from './servers/post';
 import { getServers } from './servers/get';
-import { getChannels } from './channels/get';
-import { getUser } from './users/get';
+import { getChannels } from './channels';
+import { getUser } from './users';
 import { leaveServer } from './servers/leave';
 import { deleteServer } from './servers/delete';
-import { deleteChannel } from './channels/delete';
+import { deleteChannel } from './channels';
 import { getServerInvite } from './servers/invites/get';
 import { joinServer } from './servers/join';
 import { createServerInvite } from './servers/invites/post';
@@ -34,9 +34,9 @@ router.delete('/delete-server/:id', authMiddleware, deleteServer);
 router.delete('/delete-channel/:id', authMiddleware, deleteChannel);
 
 //Agent publiucTransfer
-import {startChat, sendMessage, getMessages} from './visitors/visitor';
-import {getChats} from './chats/chat' 
-import {createSkill, getSkills, addAgentsToSkill, removeAgentsFromSkill} from './skills/skill';
+import {startChat, sendMessage, getMessages} from './visitor';
+import {getChats} from './chat' 
+import {createSkill, getSkills, addAgentsToSkill, removeAgentsFromSkill} from './skill';
 
 router.post('/visitors/:visitorId/chat/start', startChat);
 router.post('/visitors/:visitorId/chat/send_message', sendMessage);

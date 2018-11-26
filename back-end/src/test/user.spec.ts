@@ -3,9 +3,9 @@ import * as sinonChai from 'sinon-chai';
 import * as supertest from 'supertest';
 import * as mongoose from 'mongoose';
 
-import { app } from '../../api-server';
-import { createJWT } from '../auth/jwt';
-import User from '../../models/user.model';
+import { app } from '../api-server';
+import { createJWT } from '../api/auth/jwt';
+import User from '../models/user.model';
 import { ObjectId } from 'bson';
 // tslint:disable:no-unused-expression
 
