@@ -49,11 +49,13 @@ export class SkillListComponent implements OnInit {
     this.agents = [
       {
         _id: '1',
-        name: 'mahesh balla'
+        name: 'mahesh balla',
+        selected: true
       },
       {
         _id: '2',
-        name: 'jagan ubitous'
+        name: 'jagan ubitous',
+        selected: false
       }
     ]
   }
@@ -86,8 +88,30 @@ export class SkillListComponent implements OnInit {
     this.currentSkill = {};
   }
 
-  saveSkillWithAgent(){
-    console.log("saved agent details to skill");
+  pluckValues(arr, key){
+    var outArr = [];
+    (arr || []).forEach(obj => {
+      outArr.push(obj[key]);
+    });
+
+    return outArr;
   }
+
+  async saveSkillWithAgent(){
+    console.log("saved agent details to skill");
+    var selectedAgents = this.agents.filter(function(agent){return agent.selected;});
+    var data = this.currentSkill;
+    data.agents = this.pluckValues(selectedAgents, '_id');
+    let response = await Promise.resolve(
+      this.apiService
+      .post('users/'+this.me._id+'/skills/'+this.currentSkill._id+'/addagent', data.agents)
+      .toPromise()  
+    ); 
+    console.log(response);
+  }
+
+  toggleAgentCheck(agent){
+    agent.selected = !agent.selected;
+  };
 
 }

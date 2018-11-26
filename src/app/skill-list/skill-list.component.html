@@ -70,14 +70,14 @@
         <ul class="list paddingTop">
         
           <li>
-              <span></span>
+              <span><input type="checkbox"/></span>
               <span>Name</span>
               <!-- <span>Description</span> -->
               <!-- <span>Actions</span> -->
               <span></span>
           </li>
           <li *ngFor="let agent of agents">
-              <span></span>
+              <span><input type="checkbox" (change)="toggleAgentCheck(agent)" [attr.checked]="agent.selected ? '':null"/></span>
               <span>{{agent.name}}</span>
               <!-- <span><span class="label label-warning">{{skill.agents}}</span></span> -->
               <!-- <span>
