@@ -14,6 +14,12 @@ export class AuthGuardService implements CanActivate {
 
   async canActivate(route?: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<boolean> {
     return true;
+    // if(localStorage.getItem("jwt_token")){
+    //   return true;
+    // } else {
+    //   this.router.navigate([`/login`, { redirect: state.url }]);
+    //    return false;
+    // }
     // if (this.wsService.connected) {
     //   return true;
     // } else {

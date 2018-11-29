@@ -42,12 +42,15 @@ export const appRoutes: Routes = [
   {
     // Logged in routes
     path: '', component: MainComponent,
-    pathMatch: 'full',
+    // pathMatch: 'full',
     canActivate: [AuthGuardService],
     resolve: { state: MainResolver },
     children: [
       {
         path: '', component: HomeComponent,
+      },
+      {
+        path: 'skills', component: SkillListComponent
       },
       {
         path: 'friends', component: FriendsComponent, resolve: { state: FriendsResolver },
@@ -82,10 +85,6 @@ export const appRoutes: Routes = [
         resolve: { state: ServerInviteResolver },
       },
     ],
-  },
-  {
-    path: 'skills',
-    component: SkillListComponent
   },
   {
     path: '**',
