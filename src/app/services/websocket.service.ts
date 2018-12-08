@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../reducers/app.states';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { AppStateService } from './app-state.service';
 
 @Injectable()
 export class WebsocketService {
@@ -20,8 +19,7 @@ export class WebsocketService {
   constructor(
     public errorService: ErrorService,
     public store: Store<AppState>,
-    public router: Router,
-    private appState: AppStateService,
+    public router: Router
   ) {
     errorService.errorMessage.subscribe(error => {
       this.errorMessage = error;
@@ -55,7 +53,6 @@ export class WebsocketService {
         if (this.errorMessage && this.errorMessage.id === 'lost-connection') {
           this.errorService.errorMessage.next(undefined);
         }
-        this.reconnectToChannels();
       }
       this.connected = true;
       this.reconnecting = false;
@@ -118,12 +115,4 @@ export class WebsocketService {
     });
   }
 
-  private reconnectToChannels() {
-    if (this.appState.currentServer && this.appState.currentServer._id !== 'friends') {
-      this.socket.emit('join-server', this.appState.currentServer._id);
-    }
-    if (this.appState.currentChannel) {
-      this.socket.emit('join-channel', this.appState.currentChannel._id);
-    }
-  }
 }

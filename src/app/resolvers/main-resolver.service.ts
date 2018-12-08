@@ -3,7 +3,6 @@ import { Resolve } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../reducers/app.states';
-import { UPDATE_SERVER_LIST } from '../reducers/server-list.reducer';
 import { ErrorService } from '../services/error.service';
 import { Router } from '@angular/router';
 import { ActivatedRouteSnapshot } from '@angular/router/src/router_state';
@@ -23,11 +22,8 @@ export class MainResolver implements Resolve<any> {
 
   async resolve(route: ActivatedRouteSnapshot): Promise<any> {
     try {
-      const [{ servers }, { user }]: any =
+      const [{ user }]: any =
         await Promise.all([
-          this.apiService
-            .get('servers')
-            .toPromise(),
           this.apiService
             .get('users/me')
             .toPromise()
@@ -37,10 +33,7 @@ export class MainResolver implements Resolve<any> {
         .get('users/me/chats')
         .toPromise()  
       );     
-      this.store.dispatch({
-        type: UPDATE_SERVER_LIST,
-        payload: servers,
-      });
+      
       this.store.dispatch({
         type: SET_ME,
         payload: user,

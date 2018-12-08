@@ -9,14 +9,11 @@ import ChatServer from 'shared-interfaces/server.interface';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public serverList: ChatServer[];
-
+  
   constructor(
     store: Store<AppState>,
   ) {
-    store.select('serverList').subscribe(serverList => {
-      this.serverList = serverList;
-    });
+    
   }
 
   ngOnInit() {
