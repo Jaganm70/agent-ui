@@ -7,6 +7,7 @@ export const DELETE_CHAT_REQUEST = 'DELETE_CHAT_REQUEST';
 export const ADD_AGENT_CHAT = 'ADD_AGENT_CHAT';
 export const ACTIVE_CHAT = 'ACTIVE_CHAT';
 export const ADD_CHAT_MESSAGE = 'ADD_CHAT_MESSAGE';
+export const CHAT_ENDED = 'CHAT_ENDED';
 
 export function chatRequestsReducer(
   state: ChatRequest[] = [], action) {
@@ -51,6 +52,9 @@ export function currentChatRequestReducer(
         state.messages = [];
       state.messages.push(message);
       return state;
+    case CHAT_ENDED:
+    const chat: ChatRequest = action.payload;
+    return chat;
     default:
       return state;
   }

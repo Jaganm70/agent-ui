@@ -7,6 +7,7 @@ import { ChatRequest, Message, AgentChat } from 'shared-interfaces/visitor.inter
 import { Me } from 'shared-interfaces/user.interface';
 import { ADD_CHAT_MESSAGE } from '../../reducers/chat-request.reducer';
 
+
 @Component({
   selector: 'app-chat-window',
   templateUrl: './chat-window.component.html',
@@ -20,19 +21,24 @@ export class ChatWindowComponent implements OnInit {
   
   messages: Observable<Message[]>;
   activeChat : ChatRequest;
-  me : Me
+  me : Me;
+  loading:false;
+  ws;
   constructor(private store: Store<AppState>, private wsService: WebsocketService) {
+    this.ws = this.wsService;
     this.messages = this.store.select((state) => {
       return (state.currentChat && state.currentChat.messages)? state.currentChat.messages :[];
     });
+    
     store.select(state => state.currentChat).subscribe(obj =>{
         this.activeChat = obj;
       });
       store.select(state => state.me).subscribe(obj =>{
         this.me = obj;
       }); 
+      
     }
-
+  
   ngOnInit() {
   }
 
@@ -48,7 +54,8 @@ export class ChatWindowComponent implements OnInit {
       type : 'agent',
       visitorId: this.activeChat.visitorId,
       sessionId: this.activeChat.sessionId,
-      agentId : this.me._id
+      agentId : this.me._id,
+      createdDate: new Date().toISOString()
     };
     this.store.dispatch({
       type: ADD_CHAT_MESSAGE,
@@ -60,6 +67,7 @@ export class ChatWindowComponent implements OnInit {
     //this.scrollChatToBottom();
   }
   endChat(chat: any){
+    //delete chat.messages;
     this.wsService.socket.emit('end-chat', chat);
   }
   scrollChatToBottom() {

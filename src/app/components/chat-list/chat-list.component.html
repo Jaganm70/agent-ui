@@ -18,8 +18,7 @@
         <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
         <div class="chat_ib">
           <h5>{{chat.visitorId}} <span class="chat_date">{{chat.updatedDate | date}}</span></h5>
-          <p>Test, which is a new approach to have all solutions 
-            astrology under one roof.</p>
+          <p>{{getLastMessage(chat.messages)}}</p>
         </div>
       </div>
     </div>

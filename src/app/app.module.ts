@@ -33,6 +33,8 @@ import { AppBodyComponent } from './components/app-body/app-body.component';
 import { RightPanelComponent } from './components/right-panel/right-panel.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { WebsocketService } from './services/websocket.service';
+import { NgxLoadingModule } from 'ngx-loading';
+
 
 const optionalImports = environment.production ? [] : [
   StoreDevtoolsModule.instrument({
@@ -72,6 +74,7 @@ const optionalImports = environment.production ? [] : [
     StoreModule.forRoot(reducers),
     ShContextMenuModule,
     ClipboardModule,
+    NgxLoadingModule.forRoot({}),
     ...optionalImports,
   ],
   providers: [

@@ -2,6 +2,8 @@ import { redisLib } from '../../RedisLib'
 import { Message } from '../../db/message'
 import { random } from '../../utils/random';
 import { Chat } from '../../db/chat'
+import sendMessage  from '../../utils/requestutil'
+
 export async function agentEvents(io: any) {
     const redis = await redisLib();
     io.on('connection', socket => {
@@ -31,6 +33,8 @@ export async function agentEvents(io: any) {
                 data._id = messageId;
                 data.sessionId = visitor.sessionId;
                 await new Message().save(data)
+                sendMessage(data)
+                
             } else {
                 const message =  {
                     _id: messageId,
@@ -48,6 +52,7 @@ export async function agentEvents(io: any) {
         });
 
         socket.on('end-chat',async(data: any) => {
+            console.log("AAAAAAAAA");
             const visitorId = data.visitorId;
             const visitor = await redis.hget("chat_visitors", visitorId);
             await redis.hdel("chat_visitors", visitorId);
@@ -65,7 +70,9 @@ export async function agentEvents(io: any) {
               };
               await new Message().save(message); 
               await new Chat().updateChatStatus(data._id, 'inactive')
-              socket.emit('send-message', message)  
+              socket.emit('send-message', message);
+              data.status = 'inactive';
+              socket.emit('chat-ended', data);  
         });
         
     });

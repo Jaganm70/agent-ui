@@ -16,7 +16,6 @@ export class ChatListComponent implements OnInit {
   activeVisitorId: any;
   constructor(private store: Store<AppState>, private wsService: WebsocketService) {
     this.agentChats = this.store.select((state) => {
-      console.log("AAAAAAAA",state.currentChat._id);
       this.activeVisitorId = state.currentChat._id;
       return state.agentChats;  
     });
@@ -31,6 +30,18 @@ export class ChatListComponent implements OnInit {
       payload: visitorObject
     });
     // this.activeVisitorId = visitorObject.visitorId;
+  }
+
+  getLastMessage(arr){
+    let msg;
+    arr = arr? arr: [];
+    arr.forEach(el => {
+       if(el.type==='agent'){
+         msg = el.message.text;
+         return;
+       }  
+     });
+     return msg? msg :'Nothing'
   }
 
 }

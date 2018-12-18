@@ -50,7 +50,8 @@ export async function sendMessage(req, res) {
             visitorId : visitorId,
             agentId : visitor.agentId,
             type : 'visitor', 
-            sessionId: sessionId 
+            sessionId: sessionId,
+            createdDate: new Date().toDateString() 
         }   
          var socketId = await redis.hget("chat_agents", visitor.agentId);
          io.to(socketId).emit('chat-message', data);
