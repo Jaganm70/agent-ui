@@ -15,6 +15,7 @@ export class ChatListComponent implements OnInit {
   agentChats: Observable<AgentChat[]>;
   activeVisitorId: any;
   constructor(private store: Store<AppState>, private wsService: WebsocketService) {
+    //this.store.subscribe(state => this.agentChats = state.agentChats);
     this.agentChats = this.store.select((state) => {
       this.activeVisitorId = state.currentChat._id;
       return state.agentChats;  
@@ -22,6 +23,7 @@ export class ChatListComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.store.subscribe(state => console.log(state));
   }
 
   selectVisitor(visitorObject){

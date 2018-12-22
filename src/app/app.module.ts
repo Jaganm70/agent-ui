@@ -35,6 +35,7 @@ import { SkillListComponent } from './skill-list/skill-list.component';
 import { WebsocketService } from './services/websocket.service';
 import { NgxLoadingModule } from 'ngx-loading';
 import { VisitorDetailsComponent } from './components/visitor-details/visitor-details.component';
+import { CookieModule } from 'ngx-cookie';
 
 
 const optionalImports = environment.production ? [] : [
@@ -77,6 +78,7 @@ const optionalImports = environment.production ? [] : [
     ShContextMenuModule,
     ClipboardModule,
     NgxLoadingModule.forRoot({}),
+    CookieModule.forRoot(),
     ...optionalImports,
   ],
   providers: [

@@ -5,6 +5,7 @@ import { AppState } from '../../reducers/app.states';
 import { WebsocketService } from '../../services/websocket.service';
 import { Me } from 'shared-interfaces/user.interface';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-app-header',
@@ -13,7 +14,8 @@ import { Router } from '@angular/router';
 })
 export class AppHeaderComponent implements OnInit {
   me : Me
-  constructor(private store: Store<AppState>, private router : Router, private wsService: WebsocketService) {
+  constructor(private store: Store<AppState>, private router : Router, private wsService: WebsocketService, 
+    private cookieService:CookieService) {
     this.store.select(state=> state.me).subscribe(obj =>{
       if(obj && !obj.status) obj.status = "offline"
       this.me = obj;
@@ -21,6 +23,7 @@ export class AppHeaderComponent implements OnInit {
    }
   signout(){
     this.wsService.connected = false;
+    this.cookieService.removeAll();
     this.router.navigate(['/login']);
   }
   changeStatus(status){

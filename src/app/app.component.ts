@@ -8,6 +8,6 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent {
   constructor(private titleService: Title) {
-    this.titleService.setTitle('Angular 5 Chat App');
+    this.titleService.setTitle('SH Live Chat');
   }
 }
