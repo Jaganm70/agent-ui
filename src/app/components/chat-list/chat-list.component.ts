@@ -17,13 +17,13 @@ export class ChatListComponent implements OnInit {
   constructor(private store: Store<AppState>, private wsService: WebsocketService) {
     //this.store.subscribe(state => this.agentChats = state.agentChats);
     this.agentChats = this.store.select((state) => {
-      this.activeVisitorId = state.currentChat._id;
+      this.activeVisitorId = state.currentChat ? state.currentChat._id: null;
       return state.agentChats;  
     });
    }
 
   ngOnInit() {
-    this.store.subscribe(state => console.log(state));
+    //this.store.subscribe(state => console.log(state));
   }
 
   selectVisitor(visitorObject){

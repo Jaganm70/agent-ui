@@ -31,7 +31,6 @@ export function agentChatsReducer(
   switch (action.type) {
     case AGENT_CHATS:
       const agentChats: AgentChat[] = action.payload;
-      console.log("QQQQ", agentChats);
       return agentChats
     case ADD_AGENT_CHAT:
       const agentChat: AgentChat = action.payload;
