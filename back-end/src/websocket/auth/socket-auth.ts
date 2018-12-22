@@ -26,11 +26,11 @@ function logInAuth(io) {
     }
     try {
       socket.claim = await verifyJWT(cookies.jwt_token);
-      const user: any = await User.findById(socket.claim.user_id);
+      //const user: any = await User.findById(socket.claim.user_id);
 
-      if (!user) {
+      /*if (!user) {
         return next(new Error('User not found'));
-      }
+      }*/
       
       return next();
     } catch (e) {

@@ -20,10 +20,14 @@ export async function getUser(req, res) {
 }
 
 async function getMeUser(req, res) {
-  const user: any = await getUserById(req.claim.user_id);
-  const meUser: Me = {
+  //const user: any = await getUserById(req.claim.user_id);
+  /*const meUser: Me = {
     _id: user._id,
     username: user.username,
+  };*/
+  const meUser: Me = {
+    _id: req.claim.user_id,
+    username: req.claim.username,
   };
 
   res.status(200).json({

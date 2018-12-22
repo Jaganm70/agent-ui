@@ -3,7 +3,7 @@ import {Promise} from 'bluebird';
 
 export default function sendMessage(data){
   const opts ={
-    url :"http://requestbin.fullcontact.com/ziyo1tzi",
+    url :"http://requestbin.fullcontact.com/1lylvjk1",
     method: 'POST',
     headers: {
         'Content-Type':'application/json'
@@ -14,7 +14,10 @@ export default function sendMessage(data){
 }
   return new Promise((resolve, reject)=>{
     request(opts, (err, response, body)=>{
-      if(err) reject(err)
+      if(err) {
+        console.log("Response....", err);
+        reject(err)
+      }
 
       resolve(body);
     })

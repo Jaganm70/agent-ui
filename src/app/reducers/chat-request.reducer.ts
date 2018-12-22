@@ -27,14 +27,15 @@ export function chatRequestsReducer(
 
 
 export function agentChatsReducer(
-  state: ChatRequest[] = [], action) {
+  state: AgentChat[] = [], action) {
   switch (action.type) {
     case AGENT_CHATS:
       const agentChats: AgentChat[] = action.payload;
+      console.log("QQQQ", agentChats);
       return agentChats
     case ADD_AGENT_CHAT:
       const agentChat: AgentChat = action.payload;
-      return [...state, agentChat];
+      return [agentChat, ...state];
     default:
       return state;
   }

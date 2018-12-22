@@ -2,7 +2,7 @@ api:
   port: 7203
 mongodb:
   url: 'mongodb://127.0.0.1:27017/chat-app'
-JWT_SECRET: oijsdfogij02349sdpok
+JWT_SECRET: 9SyECk96oDsTmXfogIieDI0cD/8FpnojlYSUJT5U9I/FGVmBz5oskmjOR8cbXTvoPjX+Pq/T/b1PqpHX0lYm0oCBjXWICA==
 TEST_SOCKET_SECRET: 'd0934i2*@!*%j4fehg0[]sdf,af2'
 https:
   enable: false

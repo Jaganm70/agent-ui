@@ -20,15 +20,16 @@ export interface Message {
 
 export interface AgentChat {
   _id : String,
-  visitorId : String,
-  sessionId: String,
-  visitorName : String,
-  messages : Message[]
+  visitorId? : String,
+  sessionId?: String,
+  visitorName? : String,
+  status? : String,
+  messages? : Message[]
 }
 export interface ChatRequest {
   _id : String,
   visitorId : String,
   sessionId: String,
-  visitorName : String,
-  messages : Message[]
+  visitorName? : String,
+  messages? : Message[]
 }

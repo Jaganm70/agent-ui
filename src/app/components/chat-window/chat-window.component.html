@@ -1,8 +1,9 @@
-<div class="mesgs">
+<div class="chat-window">
+<div *ngIf="activeChat; else nochat" class="mesgs">
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px',fullScreenBackdrop: false	 }"></ngx-loading>
   <div>
-    <button *ngIf='activeChat.status=="active"' type="button" class="btn btn-danger pull-right" (click)="endChat(activeChat)">End Chat</button>
-    <button *ngIf='activeChat.status!=="active"' disabled type="button" class="btn btn-danger pull-right" (click)="endChat(activeChat)">End Chat</button>
+    <button *ngIf='activeChat && activeChat.status=="active"' type="button" class="btn btn-danger pull-right" (click)="endChat(activeChat)">End Chat</button>
+    <button *ngIf='activeChat && activeChat.status!=="active"' disabled type="button" class="btn btn-danger pull-right" (click)="endChat(activeChat)">End Chat</button>
   </div>
   <div class="clearfix"></div>
   <div class="msg_history">
@@ -35,4 +36,10 @@
       <button class="msg_send_btn" type="button" (click)="sendMessage(chatMessage)"><span class="glyphicon glyphicon-send"></span></button>
     </div>
   </div>
+</div>
+<ng-template #nochat>
+  <div class="no-chat">
+    Welcome to Smarthirer Live Chat.
+  </div>
+</ng-template>
 </div>

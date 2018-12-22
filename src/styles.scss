@@ -289,11 +289,14 @@ img{ max-width:100%;}
   margin: 8px 0 0;
 }
 .received_withd_msg { width: 57%;}
-.mesgs {
+.chat-window {
   padding: 0px;
   width: 500px;
-  border-right: 2px solid #ccc;
+  .mesgs {
+    border-right: 2px solid #ccc;
+  }
 }
+
 
  .sent_msg p {
   background: #05728f none repeat scroll 0 0;

@@ -13,6 +13,7 @@
   </div>
   <div>
   <div class="inbox_chat">
+    <div *ngIf="agentChats?.length > 0">
     <div class="chat_list" *ngFor="let chat of agentChats | async" [ngClass]="{'active_chat': chat._id == activeVisitorId}" (click)="selectVisitor(chat)">
       <div class="chat_people">
         <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
@@ -22,6 +23,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
   </div>
 </div>

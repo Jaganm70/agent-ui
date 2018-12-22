@@ -34,6 +34,7 @@ import { RightPanelComponent } from './components/right-panel/right-panel.compon
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { WebsocketService } from './services/websocket.service';
 import { NgxLoadingModule } from 'ngx-loading';
+import { VisitorDetailsComponent } from './components/visitor-details/visitor-details.component';
 
 
 const optionalImports = environment.production ? [] : [
@@ -61,6 +62,7 @@ const optionalImports = environment.production ? [] : [
     AppBodyComponent,
     RightPanelComponent,
     SkillListComponent,
+    VisitorDetailsComponent,
   ],
   entryComponents: [
   ],

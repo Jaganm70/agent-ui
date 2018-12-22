@@ -22,21 +22,56 @@ export async function agentEvents(io: any) {
             var session = await redis.hget("chat_visitors", visitorId);
             session.agentId = agentId;
             await redis.hset("chat_visitors", visitorId, session);
+            const agent = socket.claim;
+            const event = {
+                "message": {
+                    type : 'text',
+                    text : 'Agent accepted your chat'
+                  },
+                "event": "accepted",
+                "visitor": {
+                    "id": data.visitorId,
+                    "name": ""
+                },
+                "agent": {
+                    "id": agent.user_id,
+                    "name": agent.username
+                },
+                "sessionId": data.sessionId,
+                "createdDate": data.createdDate
+             }
+             sendMessage(event)
         });
 
         socket.on('send-message',async(data: any) => {
             const visitorId = data.visitorId;
             const visitor = await redis.hget("chat_visitors", visitorId);
             const messageId = await random();
-                
+            const agent = socket.claim;
+
             if(visitor){
                 data._id = messageId;
                 data.sessionId = visitor.sessionId;
-                await new Message().save(data)
-                sendMessage(data)
+                await new Message().save(data);
+                const event = {
+                    "message": data.message,
+                    "event": "message",
+                    "visitor": {
+                        "id": data.visitorId,
+                        "name": ""
+                    },
+                    "agent": {
+                        "id": agent.user_id,
+                        "name": agent.username
+                    },
+                    "sessionId": data.sessionId,
+                    "createdDate": data.createdDate,
+                    "_id": data._id
+                }
+                sendMessage(event);
                 
             } else {
-                const message =  {
+                const _data =  {
                     _id: messageId,
                     message : {
                       type : 'text',
@@ -47,17 +82,33 @@ export async function agentEvents(io: any) {
                     sessionId: data.sessionId,
                     agentId : data.agentId
                 };
-                socket.emit('send-message', message)  
+                socket.emit('send-message', _data);
+                const event = {
+                    "message": data.message,
+                    "event": "closed",
+                    "visitor": {
+                        "id": data.visitorId,
+                        "name": ""
+                    },
+                    "agent": {
+                        "id": agent.user_id,
+                        "name": agent.username
+                    },
+                    "sessionId": data.sessionId,
+                    "createdDate": data.createdDate,
+                    "_id": messageId
+                }
+                sendMessage(event)  
             }
         });
 
         socket.on('end-chat',async(data: any) => {
-            console.log("AAAAAAAAA");
             const visitorId = data.visitorId;
             const visitor = await redis.hget("chat_visitors", visitorId);
             await redis.hdel("chat_visitors", visitorId);
+            const agent = socket.claim; 
             const messageId = await random();
-            const message =  {
+            const msg =  {
                 _id : messageId,
                 message : {
                   type : 'text',
@@ -68,11 +119,27 @@ export async function agentEvents(io: any) {
                 sessionId: data.sessionId,
                 agentId : data.agentId
               };
-              await new Message().save(message); 
+              await new Message().save(msg); 
               await new Chat().updateChatStatus(data._id, 'inactive')
-              socket.emit('send-message', message);
+              socket.emit('send-message', msg);
               data.status = 'inactive';
-              socket.emit('chat-ended', data);  
+              socket.emit('chat-ended', data);
+              const event = {
+                "message": msg.message,
+                "event": "closed",
+                "visitor": {
+                    "id": data.visitorId,
+                    "name": ""
+                },
+                "agent": {
+                    "id": agent.user_id,
+                    "name": agent.username
+                },
+                "sessionId": data.sessionId,
+                "createdDate": data.createdDate,
+                "_id": messageId
+             }
+            sendMessage(event)  
         });
         
     });
