@@ -59,7 +59,7 @@ export default async function (req, res) {
 
 function validate(data){
   const opts ={
-    url :"http://ec2-52-206-49-228.compute-1.amazonaws.com:9343/server/api/v1/login",
+    url :"http://ec2-18-209-220-223.compute-1.amazonaws.com:9343/server/api/v1/login",
     method: 'POST',
     headers: {
         'Content-Type':'application/json'

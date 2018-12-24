@@ -36,6 +36,14 @@ import { WebsocketService } from './services/websocket.service';
 import { NgxLoadingModule } from 'ngx-loading';
 import { VisitorDetailsComponent } from './components/visitor-details/visitor-details.component';
 import { CookieModule } from 'ngx-cookie';
+import { AgentUtilsComponent } from './components/agent-utils/agent-utils.component';
+import { CompanyUpdatesComponent } from './components/company-updates/company-updates.component';
+import { AgentTemplatesComponent } from './components/agent-templates/agent-templates.component';
+import { AgentNotesComponent } from './components/agent-notes/agent-notes.component';
+
+import { NgxEditorModule } from 'ngx-editor';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 
 
 const optionalImports = environment.production ? [] : [
@@ -64,6 +72,10 @@ const optionalImports = environment.production ? [] : [
     RightPanelComponent,
     SkillListComponent,
     VisitorDetailsComponent,
+    AgentUtilsComponent,
+    CompanyUpdatesComponent,
+    AgentTemplatesComponent,
+    AgentNotesComponent,
   ],
   entryComponents: [
   ],
@@ -79,6 +91,8 @@ const optionalImports = environment.production ? [] : [
     ClipboardModule,
     NgxLoadingModule.forRoot({}),
     CookieModule.forRoot(),
+    NgxEditorModule ,
+    TooltipModule.forRoot(),
     ...optionalImports,
   ],
   providers: [

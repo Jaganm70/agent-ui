@@ -1,0 +1,39 @@
+.company-updates {
+  width: calc(100vw - 850px);
+  height: 150px;
+  .carousel{
+    width:90%;
+    margin:0px auto;
+    .item {
+      height: 125px;
+      box-shadow: 1px 1px 1px 1px #ccc;
+      padding: 8px;
+      font-style: italic;
+      p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: 90%;
+        white-space: unset;
+      }
+    }
+  }
+  .slick-slide{
+    margin:10px;
+  }
+  .slick-slide img{
+    width: calc(100vw - 900px);
+    height: 200px;
+    border: 2px solid #fff;
+  }
+  .slick-prev:before, .slick-next:before {
+    color: black !important;
+  }
+  .title{
+    text-align: center;
+    padding: 2px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #05728f
+  }
+  
+}
