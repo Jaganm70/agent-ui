@@ -15,7 +15,7 @@ export async function agentEvents(io: any) {
             var agentId = data.agentId;
             var chatId = data._id;
             await new Chat().addAgentToChat(chatId, agentId);
-            const new_chat = await new Chat().getChatById(chatId);
+            const new_chat:any = await new Chat().getChatById(chatId);
             console.log("New Chat...", new_chat);
             io.emit("delete-chat-request", new_chat);
             socket.emit("new-chat", new_chat);
@@ -37,7 +37,7 @@ export async function agentEvents(io: any) {
                     "id": agent.user_id,
                     "name": agent.username
                 },
-                "sessionId": data.sessionId,
+                "sessionId": new_chat.sessionId,
                 "createdDate": data.createdDate
              }
              sendMessage(event)
