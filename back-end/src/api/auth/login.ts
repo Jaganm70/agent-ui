@@ -7,6 +7,8 @@ import * as config from 'config';
 import * as request from 'request';
 import {Promise} from 'bluebird';
 
+const LOGIN_URL: string = config.get('LOGIN_URL');
+
 const schema = Joi.object().keys({
   username: Joi.string().required(),
   password: Joi.string().required(),
@@ -59,7 +61,7 @@ export default async function (req, res) {
 
 function validate(data){
   const opts ={
-    url :"http://ec2-18-209-220-223.compute-1.amazonaws.com:9343/server/api/v1/login",
+    url : LOGIN_URL,
     method: 'POST',
     headers: {
         'Content-Type':'application/json'

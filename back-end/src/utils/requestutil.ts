@@ -1,9 +1,11 @@
 import * as request from 'request';
 import {Promise} from 'bluebird';
+import * as config from 'config';
+const WEBHOOK_URL: string = config.get('WEBHOOK_URL');
 
 export default function sendMessage(data){
   const opts ={
-    url :"http://requestbin.fullcontact.com/1lylvjk1",
+    url : WEBHOOK_URL,
     method: 'POST',
     headers: {
         'Content-Type':'application/json'
