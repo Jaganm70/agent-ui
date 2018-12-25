@@ -43,6 +43,8 @@ import { AgentNotesComponent } from './components/agent-notes/agent-notes.compon
 
 import { NgxEditorModule } from 'ngx-editor';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { SlickModule } from 'ngx-slick';
+
 
 
 
@@ -93,6 +95,7 @@ const optionalImports = environment.production ? [] : [
     CookieModule.forRoot(),
     NgxEditorModule ,
     TooltipModule.forRoot(),
+    SlickModule.forRoot(),
     ...optionalImports,
   ],
   providers: [

@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-company-updates',
   templateUrl: './company-updates.component.html',
   styleUrls: ['./company-updates.component.scss']
 })
+
+
+
 export class CompanyUpdatesComponent implements OnInit {
 
   constructor() { 
@@ -17,7 +21,8 @@ export class CompanyUpdatesComponent implements OnInit {
       dots:true,
       arrows: true,
       centerMode: true,
-      });       
+    });       
   }
+
 
 }
