@@ -27,7 +27,7 @@ export class ChatRequestsWindowComponent implements OnInit {
       this.me = rep;
     });
   }
-
+  
   acceptRequest(request){
     event.preventDefault();
     var data = {
@@ -63,9 +63,12 @@ export class ChatRequestsWindowComponent implements OnInit {
     document.getElementById("chat-requests-window-open").style.display = "none";
     document.getElementById("chat-requests-window-close").style.display = "block";
   }
-
+  
+  
+  
   ngOnInit() {
    // $( "#chat-requests-window" ).draggable();
+   
   }
 
 }

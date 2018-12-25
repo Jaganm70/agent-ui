@@ -31,6 +31,7 @@ function visitorchatrequest(wsService: WebsocketService){
       type: CHAT_REQUEST,
       payload: visitor,
     });
+    playAudio();
   });
 }
 
@@ -73,4 +74,9 @@ function chatEnded(wsService: WebsocketService){
       payload: chat,
     });
   });
+}
+
+function playAudio(){
+  var x:any = document.getElementById("myAudio"); 
+  x.play();
 }

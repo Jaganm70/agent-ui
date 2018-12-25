@@ -1,13 +1,14 @@
 .agent-utils {
     background: #f8f8f8 ;
-    .util1{
+    width: calc(100vw - 1000px);
+    .util1 {
         height: 200px;
     }
-    .util2{
+    .util2 {
         height: 200px;
     }
-    .util3{
-        height: 300px;
+    .util3 {
+        /*height: 200px;*/
     }
     .divider {
         height: 1px;
