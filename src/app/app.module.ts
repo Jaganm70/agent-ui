@@ -44,6 +44,7 @@ import { AgentNotesComponent } from './components/agent-notes/agent-notes.compon
 import { NgxEditorModule } from 'ngx-editor';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SlickModule } from 'ngx-slick';
+import { ChatRequestsWindowComponent } from './components/chat-requests-window/chat-requests-window.component';
 
 
 
@@ -78,6 +79,7 @@ const optionalImports = environment.production ? [] : [
     CompanyUpdatesComponent,
     AgentTemplatesComponent,
     AgentNotesComponent,
+    ChatRequestsWindowComponent,
   ],
   entryComponents: [
   ],

@@ -1,0 +1,30 @@
+<div class="chat-requests-window">
+   <div class="open-button" id="chat-requests-window-close" (click)="openForm()">
+    <span class="title">Chat Requests</span><span class="count" *ngIf="count > 0">{{count}}</span><!--<span class="glyphicon glyphicon-resize-full"></span>-->
+  </div>
+    <div class="chat-popup" id="chat-requests-window-open">
+       <div class="header">
+       <span>Chat Requests</span><span class="glyphicon glyphicon-remove minimize" (click)="closeForm()"></span> 
+       </div>
+       <div class="form-container">
+          <div class="chat-request" *ngFor="let request of chatRequests | async">
+              <div class="chat-request-title">
+                  Chat Request
+                </div>
+                <span class="text-right">
+                    <input type="button" class="btn btn-primary btn-sm" value="Accept" (click)="acceptRequest(request)">
+                </span>
+            </div> 
+      </div>
+       <!--<form action="/action_page.php" class="form-container">
+          <h1>Chat</h1>
+      
+          <label for="msg"><b>Message</b></label>
+          <textarea placeholder="Type message.." name="msg" required></textarea>
+      
+          <button type="submit" class="btn">Send</button>
+          <button type="button" class="btn cancel" (click)="closeForm()">Close</button>
+        </form>
+      </div>-->
+
+</div>
